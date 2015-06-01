@@ -1,0 +1,13 @@
+<!doctype html>
+<html>
+  <head></head>
+  <body>
+    <h1>Attendance</h1>
+    <script src='http://jshawl.com/jq'></script>
+    <script type="text/javascript">
+      $.getJSON("http://api.wdidc.org/students?callback=?", function( students ){
+        console.log( students )	  
+      }) 
+    </script>
+  </body>
+</html>
