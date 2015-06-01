@@ -1,5 +1,8 @@
 require 'sinatra'
+require 'sinatra/reloader'
+require 'pry'
 require 'rest-client'
+require 'httparty'
 require 'json'
 require './env' if File.exists?('env.rb')
 
@@ -10,15 +13,24 @@ CLIENT_ID = ENV['GH_BASIC_CLIENT_ID']
 CLIENT_SECRET = ENV['GH_BASIC_SECRET_ID']
 URL = ENV['GH_URL']
 
-get '/' do
+get '/:weekday' do
   session['access_token'] ||= ''
   erb :index, :locals => { 
+    :weekday => params[:weekday],
     :client_id => CLIENT_ID,
     :access_token => session['access_token'], 
     :url => URL,
     :user_name => session['user_name'],
     :avatar_url => session['avatar_url']
   }
+end
+
+post '/:weekday' do
+  result = RestClient.post("http://localhost:2371/attendance/#{params[:weekday]}", {
+    status: params[:status],
+    githubUserId: params[:github_id]
+  },  :accept => :json)
+  redirect "/#{params[:weekday]}"
 end
 
 get '/logout' do

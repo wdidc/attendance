@@ -30,13 +30,24 @@ getStudents(function(students){
       var html = template(students[i])
       $(".students").append( html )
     }
+    var forms = $("form")
+    sort(forms)
   })
 })
 
-$("body").on("change", "form", function(event){
-  if( !this.classList.contains("completed") ){
-    students.removeChild(this)
-    students.appendChild(this)
-  }
-  this.classList.add("completed")
+$("body").on("change", "form", function( event ){
+  event.preventDefault()
+  this.submit()
+  sort(forms)
 })
+
+function sort( forms ){
+  for( var i = 0; i < forms.length; i++ ){
+    var form = forms[i]
+    if( form.querySelector(":checked")){
+      students.removeChild(form)
+      students.appendChild(form)
+      form.classList.add("completed")
+    }
+  }
+}

@@ -1,0 +1,42 @@
+body{
+  max-width:40em;
+  margin:auto;
+}
+nav img{
+  display:inline-block;
+  width:50px;
+}
+nav ul{
+  list-style:none;
+  padding:0;
+}
+nav li a{
+  display:table;
+}
+nav li a *{
+  display:table-cell;
+  vertical-align:middle;
+}
+.students form{
+  padding:1em ;
+  border-bottom:1px solid #ddd;
+}
+.students form:nth-of-type(2n){
+  background:#efefef;
+}
+.students form:after{
+  content:" ";
+  display:table;
+  clear:both;
+}
+.students form h1{
+  float:left;
+  margin:0;
+  font:inherit;
+}
+.students .left{
+  float:right;
+}
+.completed{
+  opacity:.5
+}
