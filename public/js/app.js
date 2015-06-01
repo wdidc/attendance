@@ -9,7 +9,7 @@ function getStudents(callback){
 }
 
 function updateStatuses(students, callback ){
-  $.getJSON("http://localhost:2371/attendance/w10d03?callback=?", function(events){
+  $.getJSON("http://localhost:2371/attendance"+ window.location.pathname +"?callback=?", function(events){
     for( var i = 0; i < events.length; i++ ){
       for( var j = 0; j < students.length; j++ ){
 	if(events[i].githubUserId == students[j].github_id){
