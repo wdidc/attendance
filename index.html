@@ -6,15 +6,28 @@
         max-width:40em;
 	margin:auto;
       }
-      .students h1{
-        float:left;
+      .students form{
+	padding:1em ;
+        border-bottom:1px solid #ddd;
+      }
+      .students form:nth-of-type(2n){
+        background:#efefef;
+      }
+      .students form:after{
+        content:" ";
+	display:table;
 	clear:both;
+      }
+      .students form h1{
+        float:left;
 	margin:0;
-	margin-bottom:1em;
 	font:inherit;
       }
-      .students form{
+      .students .left{
         float:right;
+      }
+      .completed{
+        opacity:.5
       }
     </style>
   </head>
@@ -23,35 +36,28 @@
     <script src='http://jshawl.com/jq'></script>
     <script src='handlebars-v3.0.3.js'></script>
     <div class='students'>
-
     </div>
     <script id="student" type="text/x-handlebars-template">
-      <h1>{{name}}</h1>
       <form class="entry">
-	<label>
-	  <input type="radio" name="status">
-	  Present
-	</label>
-	<label>
-	  <input type="radio" name="status">
-	  Tardy
-	</label>
-	<label>
-	  <input type="radio" name="status">
-	  Absent
-	</label>
+	<h1>{{name}}</h1>
+	<div class='left'>
+	  <input type="hidden" name="github_id" value="{{github_id}}">
+	  <input type="hidden" name="weekday" value="w10d03">
+	  <label>
+	    <input type="radio" name="status">
+	    Present
+	  </label>
+	  <label>
+	    <input type="radio" name="status">
+	    Tardy
+	  </label>
+	  <label>
+	    <input type="radio" name="status">
+	    Absent
+	  </label>
+	</div>
       </form>
     </script>
-    <script type="text/javascript">
-      var source   = $("#student").html();
-      var template = Handlebars.compile(source);
-      $.getJSON("http://api.wdidc.org/students?callback=?", function( students ){
-        console.log( students )	  
-	for(var i = 0; i < students.length; i++){
-	  var html = template(students[i])
-	  $(".students").append( html )
-	}
-      }) 
-    </script>
+    <script src='app.js'></script>
   </body>
 </html>
