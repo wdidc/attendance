@@ -1,12 +1,56 @@
 <!doctype html>
 <html>
-  <head></head>
+  <head>
+    <style>
+      body{
+        max-width:40em;
+	margin:auto;
+      }
+      .students h1{
+        float:left;
+	clear:both;
+	margin:0;
+	margin-bottom:1em;
+	font:inherit;
+      }
+      .students form{
+        float:right;
+      }
+    </style>
+  </head>
   <body>
     <h1>Attendance</h1>
     <script src='http://jshawl.com/jq'></script>
+    <script src='handlebars-v3.0.3.js'></script>
+    <div class='students'>
+
+    </div>
+    <script id="student" type="text/x-handlebars-template">
+      <h1>{{name}}</h1>
+      <form class="entry">
+	<label>
+	  <input type="radio" name="status">
+	  Present
+	</label>
+	<label>
+	  <input type="radio" name="status">
+	  Tardy
+	</label>
+	<label>
+	  <input type="radio" name="status">
+	  Absent
+	</label>
+      </form>
+    </script>
     <script type="text/javascript">
+      var source   = $("#student").html();
+      var template = Handlebars.compile(source);
       $.getJSON("http://api.wdidc.org/students?callback=?", function( students ){
         console.log( students )	  
+	for(var i = 0; i < students.length; i++){
+	  var html = template(students[i])
+	  $(".students").append( html )
+	}
       }) 
     </script>
   </body>
