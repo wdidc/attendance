@@ -21,6 +21,7 @@
 	  <% end %>
 	</ul>
       </nav>
+      <% if access_token != '' %>
     <div class='students'>
     </div>
     <script id="student" type="text/x-handlebars-template">
@@ -43,5 +44,6 @@
 	</div>
       </form>
     </script>
+  <% end %>
     </header>
 <%= erb :'includes/footer' %>

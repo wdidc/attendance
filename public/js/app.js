@@ -1,4 +1,5 @@
 var source   = $("#student").html();
+var forms = $("form")
 var students = document.querySelector(".students")
 var template = Handlebars.compile(source);
 
@@ -30,7 +31,6 @@ getStudents(function(students){
       var html = template(students[i])
       $(".students").append( html )
     }
-    var forms = $("form")
     sort(forms)
   })
 })
