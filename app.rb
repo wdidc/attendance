@@ -34,7 +34,7 @@ end
 
 get '/:weekday' do
   session['access_token'] ||= false
-  erb :index, :locals => { 
+  erb :weekday, :locals => { 
     :weekday => params[:weekday],
     :client_id => ENV['GH_BASIC_CLIENT_ID'],
     :access_token => session['access_token'], 
