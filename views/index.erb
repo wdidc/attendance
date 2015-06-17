@@ -1,49 +1,6 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <link rel='stylesheet' href='/css/styles.css'> 
-    <meta name="viewport" content="width=device-width">
-  </head>
-  <body>
-    <header>
-      <h1>Attendance</h1>
-      <nav>
-        <ul>
-	  <% if access_token != '' %>
-	    <li>
-	      <a href='/logout'>
-		<img src='<%= avatar_url %>' alt='<%= user_name %>'>
-		<span>Log Out <%= user_name %></span>
-	      </a>
-	    </li>
-	  <% else %>
-	    <li><a href='https://github.com/login/oauth/authorize?redirect_uri=<%= url %>/callback&scope=gist&client_id=<%= client_id %>' class=''>Log in with GitHub</a></li>
-	  <% end %>
-	</ul>
-      </nav>
-      <% if access_token != '' %>
-    <div class='students'>
-    </div>
-    <script id="student" type="text/x-handlebars-template">
-      <form class="entry" method="post" action="/<%= weekday %>">
-	<h1>{{name}}</h1>
-	<div class='left'>
-	  <input type="hidden" name="github_id" value="{{github_id}}">
-	  <label>
-	    <input type="radio" name="status" value="present" {{present}}>
-	    Present
-	  </label>
-	  <label>
-	    <input type="radio" name="status" value="tardy" {{tardy}}>
-	    Tardy
-	  </label>
-	  <label>
-	    <input type="radio" name="status" value="absent" {{absent}}>
-	    Absent
-	  </label>
-	</div>
-      </form>
-    </script>
-  <% end %>
-    </header>
-<%= erb :'includes/footer' %>
+<%= session.inspect %>
+<% if session['access_token'] %>
+  welcome!
+<% else %>
+  not authorized
+<% end %>

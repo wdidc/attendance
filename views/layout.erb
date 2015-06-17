@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel='stylesheet' href='/css/styles.css'> 
+    <meta name="viewport" content="width=device-width">
+  </head>
+  <body>
+    <header>
+      <h1>Attendance</h1>
+      <nav>
+        <ul>
+	  <% if session['access_token'] %>
+	    <li>
+	      <a href='/logout'>
+		<img src='<%= session['avatar_url'] %>' alt='<%= session['user_name'] %>'>
+		<span>Log Out <%= session['user_name'] %></span>
+	      </a>
+	    </li>
+	  <% else %>
+	    <li><a href='https://github.com/login/oauth/authorize?redirect_uri=<%= URL %>/callback&scope=gist&client_id=<%= CLIENT_ID %>' class=''>Log in with GitHub</a></li>
+	  <% end %>
+	</ul>
+      </nav>
+    </header>
+    <%= yield %>
