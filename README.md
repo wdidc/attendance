@@ -1,4 +1,10 @@
-# Sinatra - Login with Github
+# Attendance
+
+## Usage
+
+Visit http://attendance.wdidc.org/
+
+When logging in, grant access to the wdidc organization if you have not done so.
 
 ## Local Setup
 
