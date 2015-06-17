@@ -1,4 +1,5 @@
 var source   = $("#student").html();
+var forms = $("form")
 var students = document.querySelector(".students")
 var template = Handlebars.compile(source);
 
@@ -12,7 +13,7 @@ function updateStatuses(students, callback ){
   $.getJSON("http://localhost:2371/attendance"+ window.location.pathname +"?callback=?", function(events){
     for( var i = 0; i < events.length; i++ ){
       for( var j = 0; j < students.length; j++ ){
-	if(events[i].githubUserId == students[j].github_id){
+	if(events[i].githubUserId == students[j].github_user_id){
 	   students[j].status = events[i].status
 	}
       }
@@ -30,7 +31,6 @@ getStudents(function(students){
       var html = template(students[i])
       $(".students").append( html )
     }
-    var forms = $("form")
     sort(forms)
   })
 })

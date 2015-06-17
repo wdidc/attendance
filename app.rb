@@ -10,40 +10,14 @@ enable :sessions
 set :session_secret, ENV['GH_SESSION_SECRET']
 
 CLIENT_ID = ENV['GH_BASIC_CLIENT_ID']
-CLIENT_SECRET = ENV['GH_BASIC_SECRET_ID']
+CLIENT_SECRET = ENV['GH_BASIC_SECRET_SECRET']
 URL = ENV['GH_URL']
-
-get '/:weekday' do
-  session['access_token'] ||= ''
-  erb :index, :locals => { 
-    :weekday => params[:weekday],
-    :client_id => CLIENT_ID,
-    :access_token => session['access_token'], 
-    :url => URL,
-    :user_name => session['user_name'],
-    :avatar_url => session['avatar_url']
-  }
-end
-
-post '/:weekday' do
-  result = RestClient.post("http://localhost:2371/attendance/#{params[:weekday]}", {
-    status: params[:status],
-    githubUserId: params[:github_id]
-  },  :accept => :json)
-  redirect "/#{params[:weekday]}"
-end
-
-get '/logout' do
-  session['access_token'] = ''
-  redirect to('/')
-end
-
 
 get '/callback' do
   session_code = request.env['rack.request.query_hash']['code']
   result = RestClient.post('https://github.com/login/oauth/access_token', {
-      :client_id => CLIENT_ID,
-      :client_secret => CLIENT_SECRET,
+      :client_id => ENV['GH_BASIC_CLIENT_ID'],
+      :client_secret => ENV['GH_BASIC_CLIENT_SECRET'],
       :code => session_code
   },  :accept => :json)
   session['access_token'] = JSON.parse(result)['access_token']
@@ -52,3 +26,35 @@ get '/callback' do
   session['avatar_url'] = user['avatar_url']
   redirect to('/');
 end
+
+get '/logout' do
+  session['access_token'] = false
+  redirect to('/')
+end
+
+get '/:weekday' do
+  session['access_token'] ||= false
+  erb :weekday, :locals => { 
+    :weekday => params[:weekday],
+    :client_id => ENV['GH_BASIC_CLIENT_ID'],
+    :access_token => session['access_token'], 
+    :url => URL,
+    :user_name => session['user_name'],
+    :avatar_url => session['avatar_url']
+  }
+end
+
+get '/' do
+  erb :index
+end
+
+post '/:weekday' do
+  result = RestClient.post("http://localhost:2371/attendance/#{params[:weekday]}?access_token=#{session['access_token']}", {
+    status: params[:status],
+    githubUserId: params[:github_id]
+  },  :accept => :json)
+  redirect "/#{params[:weekday]}"
+end
+
+
+
