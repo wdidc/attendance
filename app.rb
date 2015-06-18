@@ -49,7 +49,7 @@ get '/' do
 end
 
 post '/:weekday' do
-  result = RestClient.post("http://localhost:2371/attendance/#{params[:weekday]}?access_token=#{session['access_token']}", {
+  result = RestClient.post("http://api.wdidc.org/attendance/#{params[:weekday]}?access_token=#{session['access_token']}", {
     status: params[:status],
     githubUserId: params[:github_id]
   },  :accept => :json)
