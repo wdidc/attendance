@@ -1,6 +1,7 @@
 body{
   max-width:40em;
   margin:auto;
+  font-family:"Helvetica Neue", sans-serif;
 }
 nav img{
   display:inline-block;
@@ -17,6 +18,14 @@ nav li a *{
   display:table-cell;
   vertical-align:middle;
 }
+
+h1 a{
+  letter-spacing:-.05em;
+  text-decoration:none;
+  color:inherit;
+  border-bottom:1px dotted #000;
+}
+
 .students form{
   padding:1em ;
   border-bottom:1px solid #ddd;
