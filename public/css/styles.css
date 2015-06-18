@@ -43,6 +43,7 @@ h1 a{
   float:left;
   margin:0;
   font:inherit;
+  font-weight:bold;
 }
 .students .left{
   float:right;
