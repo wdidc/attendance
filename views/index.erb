@@ -1,5 +1,20 @@
 <% if session['access_token'] %>
   <a href='/<%= Time.now.strftime("%Y-%m-%d") %>'>Take today's attendance.</a>
+  <script>
+    window.onload = function(){
+      $.getJSON("http://api.wdidc.org/attendance?callback=?", function(attendances){
+	console.log(attendances)
+	var ul = $("<ul/>")
+	for( var i = 0; i < attendances.length; i++ ){
+	  var attendance = attendances[i]
+	  var li = $("<li><a href='/"+ attendance.weekday +"'>"+attendance.weekday+"</a></li>")
+	  ul.append(li) 
+	}
+	$("body").append(ul) 
+	ul.before("<h2>Past Attendances</h2>")
+      })
+    }
+  </script>
 <% else %>
 
 <% end %>

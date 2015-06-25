@@ -1,4 +1,4 @@
-var source   = $("#student").html();
+var source   = $("#student").html() || "";
 var forms = $("form")
 var students = document.querySelector(".students")
 var template = Handlebars.compile(source);
@@ -15,25 +15,27 @@ function updateStatuses(students, callback ){
       for( var j = 0; j < students.length; j++ ){
 	if(events[i].githubUserId == students[j].github_user_id){
 	   students[j].status = events[i].status
-	}
+      }
       }
     }
     callback() 
   })
 }
 
-getStudents(function(students){
-  updateStatuses(students, function(){
-    for( var i = 0; i < students.length; i++ ){
-      var context = students[i]
-      var status = context.status
-      context[status] = "checked='checked'"
-      var html = template(students[i])
-      $(".students").append( html )
-    }
-    sort(forms)
+if(students){
+  getStudents(function(students){
+    updateStatuses(students, function(){
+      for( var i = 0; i < students.length; i++ ){
+	var context = students[i]
+	var status = context.status
+	context[status] = "checked='checked'"
+	var html = template(students[i])
+	$(".students").append( html )
+      }
+      sort(forms)
+    })
   })
-})
+}
 
 $("body").on("change", "form", function( event ){
   event.preventDefault()
