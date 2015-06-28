@@ -30,26 +30,22 @@ if(students){
 	var status = context.status
 	context[status] = "checked='checked'"
 	var html = template(students[i])
-	$(".students").append( html )
+        var form = $(html)
+        if( context.status ){
+	  form.addClass("completed")
+	}
+	$(".students").append( form )
       }
-      sort(forms)
     })
   })
 }
 
 $("body").on("change", "form", function( event ){
   event.preventDefault()
-  this.submit()
-  sort(forms)
+  $.post(this.action, $(this).serialize(), function(res){
+    console.log(res)
+  })
+  this.classList.add("completed")
 })
 
-function sort( forms ){
-  for( var i = 0; i < forms.length; i++ ){
-    var form = forms[i]
-    if( form.querySelector(":checked")){
-      students.removeChild(form)
-      students.appendChild(form)
-      form.classList.add("completed")
-    }
-  }
-}
+

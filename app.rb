@@ -53,7 +53,7 @@ post '/:weekday' do
     status: params[:status],
     githubUserId: params[:github_id]
   },  :accept => :json)
-  redirect "/#{params[:weekday]}"
+  return result.to_json
 end
 
 
