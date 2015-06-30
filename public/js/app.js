@@ -48,4 +48,7 @@ $("body").on("change", "form", function( event ){
   this.classList.add("completed")
 })
 
-
+$(".js-unselect-all").on("click", function(){
+  $(":checked").attr("checked",false)
+  $(".completed").removeClass("completed")
+})
