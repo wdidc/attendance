@@ -2,8 +2,8 @@
 <div class='students'>
 </div>
 <script id="student" type="text/x-handlebars-template">
-  <form class="entry" method="post" action="/<%= weekday %>">
-    <h1>{{name}}</h1>
+  <form class="entry" method="post" class="student" action="/<%= weekday %>">
+    <h1><img src='{{avatar}}' class='avatar'> {{name}}</h1>
     <div class='left'>
       <input type="hidden" name="github_id" value="{{github_user_id}}">
       <label>
