@@ -48,4 +48,13 @@ $("body").on("change", "form", function( event ){
   this.classList.add("completed")
 })
 
+$("body").on("click", ".avatar", function(event){
+  var form = $(this).closest("form")[0]
+  $(form).find("input").attr("checked", false)
+  form.classList.remove("completed")
+  $.post(form.action, $(form).serialize(), function(res){
+    console.log(res)
+  })
+})
+
 
