@@ -7,7 +7,7 @@ require 'json'
 require './env' if File.exists?('env.rb')
 
 enable :sessions
-set :session_secret, ENV.fetch('GH_SESSION_SECRET')
+set :session_secret, ENV.fetch('SESSION_SECRET')
 
 # TODO: move to GitHub class
 GH_CLIENT_ID = ENV.fetch('GH_BASIC_CLIENT_ID')
