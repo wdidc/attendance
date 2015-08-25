@@ -8,23 +8,41 @@ When logging in, grant access to the wdidc organization if you have not done so.
 
 ## Local Setup
 
-**Clone the repo:**
+### Clone the repo:
 
     $ git clone https://github.com/jshawl/sinatra-login-with-github.git
 
-**Install Dependencies**
+### Install Dependencies
 
     $ cd sinatra-login-with-github/
     $ bundle install
-    
-**Set ENV variables**
 
-I keep my ENV variables in a local env.rb file, much like this one:
+### Register a new GitHub Developer Application
 
-    ENV['GH_BASIC_CLIENT_ID'] = '...'
-    ENV['GH_BASIC_SECRET_ID'] = '...'
-    ENV['GH_URL'] = 'http://localhost:4567'
-    
+- Visit https://github.com/settings/developers
+- Choose "Register new application"
+  - Fill in "Application Name"
+    - dev (recommend): 'dev-wdi-attendance'
+    - production: 'attendance.wdidc.org'
+  - Fill in "Authorization callback URL" using the app's callback path.
+    - dev (probably): 'http://localhost:4567/auth/github/callback'
+    - production: 'http://attendance.wdidc.org/auth/github/callback'
+  - the rest are optional
+
+- Gotcha: The path for Authorization callback url used to be `callback`.  Update it to the standard oAuth path seen above.
+
+
+### Set ENV variables
+
+This app loads ENV variables from the (uncommitted) env.rb file.  
+- Copy "env.example.rb" to "env.rb" and
+- update the stated values from the GitHub Developer Application you created above.
+
+## Upgrade Actions: Aug 2015
+
+- After:
+  - remove GH_URL from env.rb
+
 ## License
 
 The MIT License (MIT)

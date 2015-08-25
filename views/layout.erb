@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel='stylesheet' href='/css/styles.css'> 
+    <link rel='stylesheet' href='/css/styles.css'>
     <meta name="viewport" content="width=device-width">
   </head>
   <body>
@@ -17,7 +17,7 @@
 	      </a>
 	    </li>
 	  <% else %>
-	    <li><a href='https://github.com/login/oauth/authorize?redirect_uri=<%= URL %>/callback&scope=repo&client_id=<%= CLIENT_ID %>' class=''>Log in with GitHub</a></li>
+	    <li><a href='<%= github_oauth_authorize_url %>' class=''>Log in with GitHub</a></li>
 	  <% end %>
 	</ul>
       </nav>
