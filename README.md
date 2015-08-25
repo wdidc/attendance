@@ -6,16 +6,20 @@ Visit http://attendance.wdidc.org/
 
 When logging in, grant access to the wdidc organization if you have not done so.
 
+For development, use the "example" weekday: http://localhost:4567/example
+
 ## Local Setup
 
 ### Clone the repo:
 
-    $ git clone https://github.com/jshawl/sinatra-login-with-github.git
+    $ git clone git@github.com:wdidc/attendance.git
+    $ cd attendance
 
 ### Install Dependencies
 
-    $ cd sinatra-login-with-github/
     $ bundle install
+
+No local database required.  It persists via API calls.
 
 ### Register a new GitHub Developer Application
 
@@ -40,8 +44,13 @@ This app loads ENV variables from the (uncommitted) env.rb file.
 
 ## Upgrade Actions: Aug 2015
 
+- Before:
+  - update env.rb
+    - copy GH_SESSION_SECRET to SESSION_SECRET
 - After:
-  - remove GH_URL from env.rb
+  - update your local env.rb
+    - remove GH_URL
+    - remove GH_SESSION_SECRET
 
 ## License
 
