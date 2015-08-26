@@ -48,6 +48,7 @@ This app loads ENV variables from the (uncommitted) env.rb file.
   - update env.rb
     - copy GH_SESSION_SECRET to SESSION_SECRET
 - After:
+  - update GitHub Developer Application's callback url to use path: "/auth/github/callback"
   - update your local env.rb
     - remove GH_URL
     - remove GH_SESSION_SECRET
