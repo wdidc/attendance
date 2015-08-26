@@ -14,6 +14,9 @@ GH_CLIENT_ID = ENV.fetch('GH_BASIC_CLIENT_ID')
 GH_CLIENT_SECRET = ENV.fetch('GH_BASIC_CLIENT_SECRET')
 GH_OAUTH_CALLBACK_PATH = "/auth/github/callback"
 
+get '/' do
+  erb :index
+end
 
 get GH_OAUTH_CALLBACK_PATH do
   session_code = request.env['rack.request.query_hash']['code']
@@ -39,6 +42,14 @@ get '/logout' do
   redirect to('/')
 end
 
+get '/util/routes' do
+  route_list = []
+  Sinatra::Application.routes.each do |http_verb, routes|
+    route_list += routes.collect {|route| "#{http_verb}: #{route[0].inspect}"}
+  end
+  route_list.inspect
+end
+
 get '/:weekday' do
   session['access_token'] ||= false
   erb :weekday, :locals => {
@@ -49,10 +60,6 @@ get '/:weekday' do
     :user_name => session['user_name'],
     :avatar_url => session['avatar_url']
   }
-end
-
-get '/' do
-  erb :index
 end
 
 post '/:weekday' do
