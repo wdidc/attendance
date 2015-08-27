@@ -6,7 +6,7 @@ var template = Handlebars.compile(source);
 function getStudents(callback){
   $.getJSON("http://api.wdidc.org/students?callback=?", function( students ){
     callback(students)
-  }) 
+  })
 }
 
 function updateStatuses(students, callback ){
@@ -18,7 +18,7 @@ function updateStatuses(students, callback ){
       }
       }
     }
-    callback() 
+    callback()
   })
 }
 
@@ -57,4 +57,11 @@ $("body").on("click", ".avatar", function(event){
   })
 })
 
-
+$("#magnifyAvatars").on("click", function(event){
+  avatars = $(".avatar");
+  if(this.checked){
+    avatars.addClass('magnify');
+  } else {
+    avatars.removeClass('magnify');
+  }
+});

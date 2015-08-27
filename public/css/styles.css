@@ -4,6 +4,18 @@ body{
   padding:1em;
   font-family:"Helvetica Neue", sans-serif;
 }
+header{
+  position: relative;
+}
+h1{
+  display: inline-block;
+}
+nav {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: inline-block;
+}
 nav img{
   display:inline-block;
   width:50px;
@@ -19,8 +31,7 @@ nav li a *{
   display:table-cell;
   vertical-align:middle;
 }
-
-h1 a{
+.student a{
   letter-spacing:-.05em;
   text-decoration:none;
   color:inherit;
@@ -39,13 +50,13 @@ h1 a{
   display:table;
   clear:both;
 }
-.students form h1{
+.students form .student{
   float:left;
   margin:0;
   font:inherit;
   font-weight:bold;
 }
-.students .left{
+.students .status{
   float:right;
 }
 .completed{
@@ -63,6 +74,15 @@ h1 a{
   top:0;
   position:absolute;
   width:50px;
+  transition: 0.2s;
+}
+.students .avatar.magnify:hover {
+  /* Making images appear bigger on mouseover */
+  width: 180px;
+  border: grey 1px solid;
+  z-index: 1;
+  top: -65px;
+  left: -65px;
 }
 
 @media all and (max-width:40em){
@@ -70,7 +90,7 @@ h1 a{
     padding-top:0;
     padding-bottom:.5em;
   }
-  .students .left{
+  .students .status{
     float:left;
   }
   label{

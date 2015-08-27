@@ -1,21 +1,23 @@
 <div class='students'>
+  <input id="magnifyAvatars" type="checkbox" checked></input>
+  <label for="magnifyAvatars">Enlarge on hover</label>
 </div>
 <script id="student" type="text/x-handlebars-template">
   <form class="entry" method="post" class="student" action="/<%= weekday %>">
-    <h1><img src='{{avatar}}' class='avatar'> {{name}}</h1>
-    <div class='left'>
+    <h2 class="student"><img src='{{avatar}}' class='avatar magnify'> {{name}}</h2>
+    <div class='status'>
       <input type="hidden" name="github_id" value="{{github_user_id}}">
       <label>
-	<input type="radio" name="status" value="present" {{present}}>
-	Present
+        <input type="radio" name="status" value="present" {{present}}>
+        Present
       </label>
       <label>
-	<input type="radio" name="status" value="tardy" {{tardy}}>
-	Tardy
+        <input type="radio" name="status" value="tardy" {{tardy}}>
+        Tardy
       </label>
       <label>
-	<input type="radio" name="status" value="absent" {{absent}}>
-	Absent
+        <input type="radio" name="status" value="absent" {{absent}}>
+        Absent
       </label>
     </div>
   </form>
