@@ -41,9 +41,20 @@ function getStudents(callback){
   });
 }
 
+function localizeAvatars(students){
+  students.forEach(function(student){
+    isLocal = window.location.host.match('localhost');
+    if(isLocal){
+      student.avatar = "/images/avatar-placeholder.png";
+    }
+  });
+  return students;
+}
+
 function populateStudents($studentsContainer, template){
   getStudents(function(students){
     updateStatuses(students, function(){
+      students = localizeAvatars(students);
       studentEls = renderStudents(students, template);
       $studentsContainer.append(studentEls);
     });
